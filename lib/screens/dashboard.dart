@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:crypto_ticker/utilities/constants.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -10,7 +11,9 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.lightBlueAccent
+        decoration: BoxDecoration(
+          gradient:  kgradient
+      ),
       ),
     );
   }

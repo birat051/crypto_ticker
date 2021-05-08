@@ -1,3 +1,4 @@
+import 'package:crypto_ticker/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dashboard.dart';
@@ -26,6 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: kgradient
+        ),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
