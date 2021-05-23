@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "576087014165",
+    "project_id": "crypto-ticker-3fd55",
+    "storage_bucket": "crypto-ticker-3fd55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576087014165:android:7d0994d99ea3e60e32471c",
+        "android_client_info": {
+          "package_name": "com.hoardcrypto.crypto_ticker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576087014165-qqn6qsbvagputdaf6m8a64o3q7pm71id.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkn0HuODXZwRzj1E0xTGZP_PFEzxc59Sc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576087014165-qqn6qsbvagputdaf6m8a64o3q7pm71id.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

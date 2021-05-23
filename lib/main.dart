@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -21,7 +24,8 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
+        hintColor: Colors.white
       ),
       home: SplashScreen(),
     );

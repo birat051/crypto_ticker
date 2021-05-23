@@ -1,8 +1,10 @@
 import 'package:crypto_ticker/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dashboard.dart';
-
+//import 'dashboard.dart';
+import 'dart:io';
+import 'package:crypto_ticker/services/crypto_service.dart';
+import 'signin.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,17 +12,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  CryptoService _callService;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _callService=CryptoService();
+    checkConnection();
+    getQuotes();
     // _setInstanceNumber();
-    Timer(Duration(seconds: 6), () {
+    Timer(Duration(seconds: 10), () {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => Dashboard()));
+          new MaterialPageRoute(builder: (context) => SignIn()));
     });
-  }
 
+  }
+  Future<void> getQuotes() async{
+    await _callService.getCryptoQuotes();
+  }
+  void checkConnection() async{
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      exit(0);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

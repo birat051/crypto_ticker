@@ -28,13 +28,25 @@ dependencies:
   #list of flutter packages to be used in this application
   cupertino_icons: ^1.0.2
   crypto_font_icons: 1.0.0+1
-  #ably_flutter: ^1.2.0-preview.1
-  syncfusion_flutter_charts: ^19.1.58
-  intl: ^0.17.0
+ # ably_flutter: ^1.2.0-preview.1
+ # syncfusion_flutter_charts: ^19.1.63
+  fl_chart: ^0.36.1
+  #intl: any
   twitter_api: ^0.1.2
  # http: ^0.12.0+2
   http: any
+  finance_quote: ^0.1.2
+  font_awesome_flutter: ^9.0.0
+  flutter_signin_button: ^2.0.0
+  flutter_localizations:
+    sdk: flutter
+  firebase_core: ^0.7.0
+  firebase_auth: ^0.20.1
+  loading_overlay: ^0.3.0
+  cloud_firestore: any
  # image_sequence_animator: ^2.0.0
+dependency_overrides:
+  intl: ^0.17.0-nullsafety.2
 
 
 dev_dependencies:
@@ -68,10 +80,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Oswald
+      fonts:
+        - asset: fonts/Oswald-SemiBold.ttf
+    - family: PT Sans
+      fonts:
+        - asset: fonts/PTSans-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
