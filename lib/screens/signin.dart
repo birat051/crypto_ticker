@@ -95,7 +95,7 @@ class _SignInState extends State<SignIn> {
 
 
                             });
-                            print(passwordsecret);
+                         //   print(passwordsecret);
                           },
                           child: Icon(_visibleicon,color: Colors.white,)),
                       border: OutlineInputBorder(

@@ -35,6 +35,7 @@ dependencies:
   twitter_api: ^0.1.2
  # http: ^0.12.0+2
   http: any
+  tweet_ui: any
   finance_quote: ^0.1.2
   font_awesome_flutter: ^9.0.0
   flutter_signin_button: ^2.0.0

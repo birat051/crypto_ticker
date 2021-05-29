@@ -15,9 +15,9 @@ class TwitterService{
       token: kaccesstoken,
       tokenSecret: ksecretaccesstoken,
     );
-    path="search/tweets.json";
+    this.path="search/tweets.json";
   }
-  Future<List> getTweetsQuery() async {
+  /* Future<void> getTweetsQuery() async {
     try {
       // Make the request to twitter
       Response response = await _twitterAPI.getTwitterRequest(
@@ -33,10 +33,35 @@ class TwitterService{
       );
 
       final decodedResponse = json.decode(response.body);
-      return decodedResponse['statuses'] as List;
+      print(decodedResponse);
+      //return decodedResponse['statuses'];
+    } catch (error) {
+      rethrow;
+    }
+  } */
+  Future<List> getTweetsQuery() async {
+    print('Path is $path');
+    print('QueryTag is $queryTag');
+    try {
+      // Make the request to twitter
+      Response response = await _twitterAPI.getTwitterRequest(
+        // Http Method
+        "GET",
+        // Endpoint you are trying to reach
+        path,
+        // The options for the request
+        options: {
+          "q": queryTag,
+          "count": "50",
+          "tweet_mode": "extended",
+        },
+      );
+
+      final decodedResponse = json.decode(response.body);
+      print('Response recieved from twitter API is ${decodedResponse['statuses']}');
+       return decodedResponse['statuses'] as List;
     } catch (error) {
       rethrow;
     }
   }
-
 }

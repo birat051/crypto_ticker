@@ -37,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Discussion Forum'),
+          title: Center(child: Text('Discussion Forum')),
         ),
         body:
         Builder(
@@ -138,7 +138,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(onTap: (){
-
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>TwitterFeedView()));
                       },
                           child: Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),)),
                       GestureDetector(

@@ -6,7 +6,7 @@ import 'package:crypto_ticker/utilities/crypto_list.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'chatscreen.dart';
-
+import 'tweets.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -18,6 +18,7 @@ class _DashboardState extends State<Dashboard> {
 
  // List<String> _price;
  // String _get_price;
+   // TwitterService tweets;
   List<CryptoCard> getCryptoList(){
     List<CryptoCard> cryptocardlist = [];
     for(int i=0;i<kcrypto_ticker.length;i++)
@@ -28,9 +29,18 @@ class _DashboardState extends State<Dashboard> {
   }
   @override
   void initState() {
-    // TODO: implement initState
+   // tweets=TwitterService('crypto');
+   // getTweets();
     super.initState();
   }
+ /* void getTweets() async{
+    try {
+      await tweets.getTweetsQuery();
+    }
+    catch(e){
+      print(e);
+    }
+  }  */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +69,11 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),),
+                  GestureDetector(
+                      onTap: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>TwitterFeedView()));
+            },
+                      child: Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),)),
                   Icon(CryptoFontIcons.BTC,size: 40,color:  Color(0xffD5603A),),
                   GestureDetector(
                       onTap: (){

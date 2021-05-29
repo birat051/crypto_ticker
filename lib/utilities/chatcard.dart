@@ -1,4 +1,3 @@
-import 'package:crypto_ticker/utilities/config.dart';
 import 'package:flutter/material.dart';
 
 class ChatCard extends StatelessWidget {

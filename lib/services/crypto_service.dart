@@ -13,6 +13,5 @@ class CryptoService{
       price.add(cryptoQuoteRaw[kcrypto_name[i]]['priceUsd'].toString());
     }
     print(price);
-   // print(price.length);
   }
 }
