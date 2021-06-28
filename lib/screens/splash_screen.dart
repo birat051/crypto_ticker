@@ -1,32 +1,24 @@
 import 'package:crypto_ticker/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-//import 'dashboard.dart';
 import 'dart:io';
 import 'package:crypto_ticker/services/crypto_service.dart';
-import 'signin.dart';
+import 'choosescreen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen> {
   CryptoService _callService;
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _callService=CryptoService();
     checkConnection();
-    getQuotes();
-    // _setInstanceNumber();
-    Timer(Duration(seconds: 10), () {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => SignIn()));
+    Timer(Duration(seconds: 6), () {
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ChooseScreen()));
     });
-
   }
   Future<void> getQuotes() async{
     await _callService.getCryptoQuotes();

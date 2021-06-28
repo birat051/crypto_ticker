@@ -9,7 +9,12 @@ color: Color(0XFFA6B0B5));  //Text Style for Ticker Symbol
 const knameTextStyle = TextStyle(fontFamily: 'PT Sans',
     fontSize: 25,
     fontWeight: FontWeight.w200,
-    color: Color(0XFFA6B0B5)); //Text Style for Crypto Name
+    color: Color(0XFFA6B0B5));
+
+const kparamTextStyle = TextStyle(fontFamily: 'PT Sans',
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+    color: Color(0XFFA6B0B5));//Text Style for Crypto Name
 
 const kSnackTextStyle =TextStyle(fontFamily: 'Oswald',
 fontSize: 20,

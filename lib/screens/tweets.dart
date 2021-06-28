@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:tweet_ui/models/api/tweet.dart';
 import 'package:tweet_ui/tweet_ui.dart';
 import '../services/twitter_api.dart';
-import 'dashboard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:crypto_ticker/utilities/constants.dart';
+import 'dashboard.dart';
+import 'package:crypto_ticker/components/sidedrawer.dart';
+
 
 class TwitterFeedView extends StatefulWidget {
   const TwitterFeedView({Key key}) : super(key: key);
@@ -42,15 +44,42 @@ class _TwitterFeedViewState extends State<TwitterFeedView> {
       });
     }
   }
-
+  final _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: kgradient
+          ),
+        ),
         title: Center(
-          child: Text("CryptoTrendingTweets",
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),),
+              GestureDetector(child: Icon(CryptoFontIcons.BTC,size: 40,color:  Color(0xffD5603A),),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard()));
+              },),
+              GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen()));
+                  },
+                  child: Icon(Icons.message,size: 40,color:  Color(0xffD5603A),)),
+            ],
+          ),
+        ),
+        //  backgroundColor: kSendColor,
+        leading: IconButton(
+          icon: Icon(Icons.menu, size: 40,color: kRecieveColor,), // change this size and style
+          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+        ),
       ),
-        ),),
+      key: _scaffoldKey,
+      drawer: SideNavigation(),
       body: Container(
         decoration: BoxDecoration(
             gradient: kgradient
@@ -70,29 +99,26 @@ class _TwitterFeedViewState extends State<TwitterFeedView> {
                     : Center(
                   child: Text(errorMessage),
                 )
-                    : Expanded(
-                  flex: 11,
-                      child: ListView.builder(
+                    : ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.symmetric(vertical: 15),
                   itemCount: tweetsJson.length,
                   itemBuilder: (context, index) {
-                      return
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: EmbeddedTweetView.fromTweet(
-                            Tweet.fromJson(tweetsJson[index]),
-                            darkMode: true,
-                            backgroundColor: Colors.transparent,
-                            useVideoPlayer: false,
-                          ),
-                        );
+                    return
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: EmbeddedTweetView.fromTweet(
+                          Tweet.fromJson(tweetsJson[index]),
+                          darkMode: true,
+                          backgroundColor: Colors.transparent,
+                          useVideoPlayer: false,
+                        ),
+                      );
                   },
                 ),
-                    ),
               ),
             ),
-            Expanded(
+        /*    Expanded(
               flex: 1,
                 child: Container(
                   child: Container(
@@ -111,18 +137,18 @@ class _TwitterFeedViewState extends State<TwitterFeedView> {
                             child: Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),)),
                         GestureDetector(
                             onTap: (){
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Dashboard()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard()));
                             },
                             child: Icon(CryptoFontIcons.BTC,size: 40,color:  Color(0xffD5603A),)),
                         GestureDetector(
                             onTap: (){
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ChatScreen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen()));
                             },
                             child: Icon(Icons.message,size: 40,color:  Color(0xffD5603A),)),
                       ],
                     ),
                   ),
-                ))
+                )) */
           ],
         ),
       ),

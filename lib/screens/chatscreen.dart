@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto_ticker/utilities/constants.dart';
 import 'package:crypto_ticker/services/chatservice.dart';
-import 'package:crypto_ticker/utilities/config.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto_ticker/utilities/chatcard.dart';
+import 'package:crypto_ticker/components/chatcard.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'dashboard.dart';
 import 'tweets.dart';
+import 'package:crypto_ticker/components/sidedrawer.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   ChatService _chatService;
   SnackBar notifyUser;
   var messageController=TextEditingController();
+  final _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<ChatCard> _messagelist=[];
   BorderRadius kleftborder=BorderRadius.only(topRight: Radius.circular(8.0),bottomLeft: Radius.circular(8.0),bottomRight: Radius.circular(8.0));
   BorderRadius krightborder=BorderRadius.only(topLeft: Radius.circular(8.0),bottomLeft: Radius.circular(8.0),bottomRight: Radius.circular(8.0));
@@ -36,9 +38,39 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
         appBar: AppBar(
-          title: Center(child: Text('Discussion Forum')),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: kgradient
+            ),
+          ),
+          title: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TwitterFeedView()));
+                    },
+                    child: Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),)),
+                GestureDetector(child: Icon(CryptoFontIcons.BTC,size: 40,color:  Color(0xffD5603A),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard()));
+                },),
+                Icon(Icons.message,size: 40,color:  Color(0xffD5603A),),
+              ],
+            ),
+          ),
+          //  backgroundColor: kSendColor,
+          leading: IconButton(
+            icon: Icon(Icons.menu, size: 40,color: kRecieveColor,), // change this size and style
+            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+          ),
         ),
+        key: _scaffoldKey,
+        drawer: SideNavigation(),
         body:
         Builder(
            builder: (context)=>
@@ -63,7 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     {
                       final textmessage=msg.data()['message'];
                       final sender=msg.data()['sender'];
-                      _strmessage=kUser.toString();
+                      _strmessage=FirebaseAuth.instance.currentUser.email.toString();
                       if(sender==_strmessage.split('@')[0])
                       _messagelist.add(ChatCard(textmessage,sender,krightborder,kSendColor,CrossAxisAlignment.end,Color(0XFFA6B0B5)));
                       else
@@ -103,7 +135,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     GestureDetector(onTap: (){
                       try {
-                        _strmessage=kUser.toString();
+                        _strmessage=FirebaseAuth.instance.currentUser.email.toString();
                         if(_message!='')
                      _chatService.sendMessage(_message, _strmessage.split('@')[0]);
                      setState(() {
@@ -124,33 +156,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   ],
                 ),
               ),
-              Expanded(
-
-                  child: Container(
-                child: Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color:Color(0XBA253743),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(onTap: (){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>TwitterFeedView()));
-                      },
-                          child: Icon(FontAwesomeIcons.twitter,size: 40,color:  Color(0xffD5603A),)),
-                      GestureDetector(
-                          onTap: (){
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Dashboard()));
-                          },
-                          child: Icon(CryptoFontIcons.BTC,size: 40,color:  Color(0xffD5603A),)),
-                      Icon(Icons.message,size: 40,color:  Color(0xffD5603A),),
-                    ],
-                  ),
-                ),
-              ))
             ],
           ),
         ),

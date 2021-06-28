@@ -68,4 +68,6 @@ const List cryptoicons=[
 ];
 
 
-List<String> price=[];
+List<String> price=[
+
+];

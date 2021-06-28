@@ -17,28 +17,6 @@ class TwitterService{
     );
     this.path="search/tweets.json";
   }
-  /* Future<void> getTweetsQuery() async {
-    try {
-      // Make the request to twitter
-      Response response = await _twitterAPI.getTwitterRequest(
-        // Http Method
-        "GET",
-        // Endpoint you are trying to reach
-        path,
-        // The options for the request
-        options: {
-          "q": queryTag,
-          "count": "10",
-        },
-      );
-
-      final decodedResponse = json.decode(response.body);
-      print(decodedResponse);
-      //return decodedResponse['statuses'];
-    } catch (error) {
-      rethrow;
-    }
-  } */
   Future<List> getTweetsQuery() async {
     print('Path is $path');
     print('QueryTag is $queryTag');
@@ -56,7 +34,6 @@ class TwitterService{
           "tweet_mode": "extended",
         },
       );
-
       final decodedResponse = json.decode(response.body);
       print('Response recieved from twitter API is ${decodedResponse['statuses']}');
        return decodedResponse['statuses'] as List;
